@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification CNN TensorFlow</title>
+    <style>
+        pre {
+            font-family: monospace;
+            white-space: pre-wrap; /* Maintain formatting */
+        }
+
+
+        
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        h2,pre {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }   
+    </style>
+</head>
+<body>
+
+    <a href="/td3" class="btn-back">&larr; Back</a>
+
+    <h1>Classification CNN TensorFlow</h1>
+    <form method="POST">
+        <!-- Nombre d'epochs -->
+        <label for="n_epoch">Number of epochs:</label>
+        <input type="number" id="n_epoch" name="n_epoch" value="{{ n_epoch }}" required>
+        <br>
+
+        <!-- Taille du lot (batch size) -->
+        <label for="batch_size">Batch Size:</label>
+        <input type="number" id="batch_size" name="batch_size" value="{{ batch_size }}" required>
+        <br>
+
+        <!-- Split de validation -->
+        <label for="validation_split">Validation Split:</label>
+        <input type="number" step="0.01" id="validation_split" name="validation_split" value="{{ validation_split }}" min="0.01" max="0.99" required>
+        <br>
+
+        <!-- Sélection de l'optimiseur -->
+        <label for="optimizer">Optimizer:</label>
+        <select id="optimizer" name="optimizer" required>
+            <option value="adam" {% if optimizer_name == 'adam' %} selected {% endif %}>Adam</option>
+            <option value="sgd" {% if optimizer_name == 'sgd' %} selected {% endif %}>SGD</option>
+            <option value="rmsprop" {% if optimizer_name == 'rmsprop' %} selected {% endif %}>RMSprop</option>
+        </select>
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if listRetour %}
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nb of epochs</th>
+                    <th>Validation Split</th>
+                    <th>Loss Total</th>
+                    <th>Accuracy Moyenne</th>
+                    <th>Loss premiére itération</th>
+                    <th>Accuracy premiére itération</th>
+                    <th>Loss dernière itération</th>
+                    <th>Accuracy dernière itération</th>
+                </tr>
+            </thead>    
+            <tbody>
+                {% for iter in listRetour %}
+                    <tr>
+                        <td>{{ iter[0] }}</td>
+                        <td>{{ iter[1] }}</td>
+                        <td>{{ iter[2] }}</td>
+                        <td>{{ iter[3] }}</td>
+                        <td>{{ iter[4] }}</td>
+                        <td>{{ iter[5] }}</td>
+                        <td>{{ iter[6] }}</td>
+                        <td>{{ iter[7] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .diabetes-card {
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            padding: 20px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .feature-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .feature-list li {
+            margin-bottom: 10px;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/td2" class="btn-back">&larr; Back</a>
+
+    <div class="diabetes-card">
+        <h1>Informations sur l'échantillon n°{{ sample_info.index }}</h1>
+        <p><strong>Valeur cible :</strong> {{ sample_info.target_value }}</p>
+        <p><strong>Caractéristiques :</strong></p>
+        <div class="feature-list">
+            <ul>
+                <li><strong>Âge :</strong> {{ sample_info.features[0] }} (en années)</li>
+                <li><strong>Sexe :</strong> {{ sample_info.features[1] }} (1 = homme, 2 = femme)</li>
+                <li><strong>IMC :</strong> {{ sample_info.features[2] }} (en kg/m²)</li>
+                <li><strong>Pression artérielle :</strong> {{ sample_info.features[3] }} (en mmHg)</li>
+                <li><strong>Numéro de grossesse :</strong> {{ sample_info.features[4] }}</li>
+                <li><strong>Insuline plasmatique :</strong> {{ sample_info.features[5] }} (en µU/ml)</li>
+                <li><strong>Insuline sérique :</strong> {{ sample_info.features[6] }} (en µU/ml)</li>
+                <li><strong>Ratio Système glucose :</strong> {{ sample_info.features[7] }}</li>
+                <li><strong>Rapport glucose-insuline :</strong> {{ sample_info.features[8] }}</li>
+                <li><strong>Protéine C réactive :</strong> {{ sample_info.features[9] }} (en mg/dl)</li>
+            </ul>
+        </div>
+
+        <!-- Bouton pour recharger la page et obtenir un autre échantillon aléatoire -->
+        <form action="/diabete" method="GET">
+            <button type="submit">Afficher un autre échantillon</button>
+        </form>
+
+        <!-- Afficher les données filtrées si présentes -->
+        {% if filtered_data %}
+            <div class="filtered-data">
+                <h2>Données filtrées:</h2>
+                <!-- Ajouter ici un tableau ou autre affichage pour les données filtrées -->
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

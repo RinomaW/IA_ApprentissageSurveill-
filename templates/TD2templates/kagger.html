@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Sales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/td2" class="btn-back">&larr; Back</a>
+
+    <h1>Top 100 Video Game Sales Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Platform</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>Publisher</th>
+                <th>NA Sales</th>
+                <th>EU Sales</th>
+                <th>JP Sales</th>
+                <th>Other Sales</th>
+                <th>Global Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td>{{ game['Rank'] }}</td>
+                <td>{{ game['Name'] }}</td>
+                <td>{{ game['Platform'] }}</td>
+                <td>{{ game['Year'] }}</td>
+                <td>{{ game['Genre'] }}</td>
+                <td>{{ game['Publisher'] }}</td>
+                <td>{{ game['NA_Sales'] }}</td>
+                <td>{{ game['EU_Sales'] }}</td>
+                <td>{{ game['JP_Sales'] }}</td>
+                <td>{{ game['Other_Sales'] }}</td>
+                <td>{{ game['Global_Sales'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

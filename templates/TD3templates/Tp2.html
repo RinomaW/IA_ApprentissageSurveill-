@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/td3" class="btn-back">&larr; Back</a>
+    <h1>Train Model</h1>
+    <form action="/td3tp2" method="POST">
+        <p>on entraine l'ANN (le réseau de neurone artificielle) depuis la base mnist</p>
+
+        <label for="num_hidden_layers">Nombre de couches cachées:</label>
+        <input type="number" id="num_hidden_layers" name="num_hidden_layers" value="1" required>
+        <br>
+        <label for="units_per_layer">Unités par couche:</label>
+        <input type="number" id="units_per_layer" name="units_per_layer" value="128" required>
+        <br>
+        <label for="batch_size">Taille du batch:</label>
+        <input type="number" id="batch_size" name="batch_size" value="128" required>
+        <br>
+        <label for="epochs">Époques:</label>
+        <input type="number" id="epochs" name="epochs" value="20" required>
+        <br>
+        <label for="activation_function">Fonction d'activation:</label>
+        <select id="activation_function" name="activation_function">
+            <option value="relu">ReLU</option>
+            <option value="sigmoid">Sigmoid</option>
+            <option value="tanh">Tanh</option>
+        </select>
+        <br>
+        <label for="loss_function">Fonction de Perte:</label>
+        <select id="loss_function" name="loss_function">
+            <option value="categorical_crossentropy">Categorical Crossentropy</option>
+            <option value="sparse_categorical_crossentropy">Sparse Categorical Crossentropy</option>
+        </select>
+        <br>
+        <label for="validation_split">Pourcentage de validation (0-1):</label>
+        <input type="number" id="validation_split" name="validation_split" value="0.1" step="0.01" min="0" max="1" required>
+        <br>
+        <input type="submit" value="Entraîner le modèle">
+    </form>
+
+    {% if results %}
+        <h2>Résultats de l'entraînement</h2>
+        <table>
+            <tr>
+                <th>Nombre de Couches Cachées</th>
+                <th>Unités par Couche</th>
+                <th>Taille de Batch</th>
+                <th>Époques</th>
+                <th>Test Loss</th>
+                <th>Test Accuracy</th>
+                <th>Fonction d'Activation</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.num_hidden_layers }}</td>
+                <td>{{ result.units_per_layer }}</td>
+                <td>{{ result.batch_size }}</td>
+                <td>{{ result.epochs }}</td>
+                <td>{{ result.test_loss }}</td>
+                <td>{{ result.test_accuracy }}</td>
+                <td>{{ result.activation_function }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

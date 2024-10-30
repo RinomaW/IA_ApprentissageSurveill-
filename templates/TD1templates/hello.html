@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur d'indice de chaleur</title>
+    <style>
+        .slider-value {
+            margin-left: 10px;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/td1" class="btn-back">&larr; Back</a>
+
+    <h1>Calculateur d'indice de chaleur</h1>
+    
+    <form method="POST" action="/hello">
+        <label for="temperature">Température (°C) :</label>
+        <input type="range" id="temperature" name="temperature" min="-30" max="50" step="0.1" value="{{ request.form.temperature or 20 }}" oninput="document.getElementById('tempValue').innerText = this.value">
+        <span id="tempValue" class="slider-value">{{ request.form.temperature or 20 }}</span> °C<br><br>
+        
+        <label for="humidite">Humidité relative (%) :</label>
+        <input type="range" id="humidite" name="humidite" min="0" max="100" step="0.1" value="{{ request.form.humidite or 50 }}" oninput="document.getElementById('humidityValue').innerText = this.value">
+        <span id="humidityValue" class="slider-value">{{ request.form.humidite or 50 }}</span> %<br><br>
+        
+        <button type="submit">Calculer</button>
+    </form>
+
+    {% if indice_de_chaleur is not none %}
+        <h2>Indice de chaleur : {{ indice_de_chaleur }} °C</h2>
+        <h2>Indice de chaleur : {{chaleur_f}} °F</h2>
+    {% endif %}
+</body>
+</html>

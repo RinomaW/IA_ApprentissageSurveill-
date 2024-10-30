@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogramme des Genres</title>
+    <style>
+        p {
+        background-color: #3a923d; /* Fond vert */
+        color: white; /* Couleur du texte */
+        padding: 15px; /* Espacement interne */
+        border-radius: 5px; /* Coins arrondis */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    }  .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/td2" class="btn-back">&larr; Back</a>
+    <h2>Question : </h2>
+    <p>Genres et Nombre de Pistes : Cr ́eez une liste de tous les genres musicaux disponibles dans
+        la base de donn ́ees Chinook avec le nombre total de pistes associ ́ees `a chaque genre. R ́ealiser et
+        afficher un histogramme avec les r ́esultats obtenus.
+        </p>
+    <h1>Nombre de Pistes par Genre Musical</h1>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Histogramme des Genres">
+</body>
+</html>

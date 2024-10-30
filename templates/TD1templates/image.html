@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout Image</title>
+    <style>
+        #preview {
+            max-width: 500px;
+            margin-top: 20px;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #e53935;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            input[type="number"], select {
+                width: calc(100% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/td1" class="btn-back">&larr; Back</a>
+
+    <h1>Télécharger et afficher une image</h1>
+
+    <form id="uploadForm" action="/image" method="POST" enctype="multipart/form-data">
+        <label for="image">Choisissez une image :</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit">Télécharger l'image</button>
+    </form>
+
+    <img id="preview" src="" alt="Aperçu de l'image" style="display: none;">
+
+    {% if image_url %}
+        <h2>Image téléchargée :</h2>
+        <img src="{{ image_url }}" alt="Image téléchargée" style="max-width: 500px;">
+    {% endif %}
+
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
