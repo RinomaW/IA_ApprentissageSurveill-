@@ -1,0 +1,4 @@
+
+#Lancer l'image
+docker build -t ia_flask .
+docker run -p 5000:5000 ia_flask

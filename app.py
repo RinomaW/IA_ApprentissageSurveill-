@@ -117,4 +117,4 @@ def td3tp3():
 
 if __name__ == '__main__':
     initialize_db()  # Initialize the database here
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000,debug=True)    
